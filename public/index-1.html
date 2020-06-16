@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <meta name="description" content="The best thing about hello world is the greeting"> 
+    <meta name="keywords" content="ull Stack Web and Hybrid Mobile Applications Developer">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link ref="shotcut icon" href="favicon.ico" />
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest"> -->
+    <!--<link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet" type="text/css" href="./dist/css/main.min.css">
+</head>
+ <body>
+    <main>
+        <header >
+            <a id="toggleMenu">Menu<a>
+            <span class="logo">My WebSite</span>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+     
+   
+    
+      
+        <h1>Hello I'm Iliya Sobolev</h1>
+        <h3> Welcome to my web site</h3>
+    
+        <!--  <img style="border-radius: 50%; float: right; margin-right: 1em;" src="https://www.gravatar.com/avatar/4678a33bf44c38e54a58745033b4d5c6?d=mm&s=64" alt="Iliya's Avatar">-->
+        <img class="avatar" src="pics/avatar.jpg" alt="Iliya's Avatar">
+        <p> After 15 years of Microsoft system and applications support, my interest in creating dynamic websites and delivering data driven results led me to transition into web and mobile development.
+      Learning Web Development using modern techniques and tools: 
+      JavaScript, jQuery,Bootstrap, MongoDB & MySQL</p>
+ 
+    </main>   
+    <script>
+
+        var toggleMenu = document.getElementById('toggleMenu');
+        var nav = document.querySelector('nav');
+        toggleMenu.addEventListener(
+          'click',
+          function(){
+            if(nav.style.display=='block'){
+              nav.style.display='none';
+            }else{
+              nav.style.display='block';
+            }
+          }
+        );
+      </script>  
+</body>
+</html>

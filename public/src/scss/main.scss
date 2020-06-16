@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+.avatar {
+  border-radius: 50%;
+  float: left;
+  margin-right: 1em; }
+
+body {
+  padding: 0;
+  margin: 0; }
+
+* {
+  font-family: 'Open Sans', sans-serif; }
+
+header {
+  height: 50px;
+  background: #000;
+  color: #fff;
+  padding: 0 .5rem 0 1rem; }
+
+header .logo {
+  line-height: 50px;
+  font-weight: bold; }
+
+nav {
+  float: right; }
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+nav ul li {
+  display: inline; }
+
+nav ul li a,
+nav ul li a:link,
+nav ul li a:visited {
+  display: inline-block;
+  padding: 0 .5rem;
+  color: #fff;
+  line-height: 50px;
+  text-decoration: none; }
+
+nav ul li a:hover {
+  background: #444; }
+
+main {
+  /* Use a margin to center the page */
+  margin: 0 auto;
+  /* Set the width of the content */
+  width: 960px;
+  /* For smaller screens to not exceed the max screen width */
+  max-width: 90%; }
+
+#toggleMenu {
+  display: none; }
+
+@media only screen and (max-width: 960px) {
+  header {
+    position: relative; }
+
+  #toggleMenu {
+    display: block;
+    float: right;
+    line-height: 50px; }
+
+  nav {
+    position: absolute;
+    display: none;
+    background: #000;
+    top: 50px;
+    left: 0;
+    right: 0; }
+
+  nav ul li a,
+  nav ul li a:link,
+  nav ul li a:visited {
+    display: block;
+    border-bottom: 1px solid #777; } 
+}
+
+section {
+      border-top: 1px solid #dedede;
+      padding: 20px 0 0; 
+     }
+
+h1 {
+      color: #111; font-family: "Tahoma", "Helvetica", "Droid Sans", sans-serif; letter-spacing: 1px;
+      font: normal 3.5em/2 "Georgia", sans-serif; text-align: center; margin: 0 auto; text-shadow: 2px 3px 2px #999;}
+.center {
+      /*border-bottom: 0.07142855em double #444 !important; color: #000; */
+      border-bottom-style: double; 
+      text-align: center;
+      font-size: 15px;
+      padding: 10px; 
+    }
+
+*[class^="col-"]{
+   background: #FFFFFF;
+   border: 1px solid #808080;
+   padding: 2em 0;
+   color: #000000;
+   text-align: left;
+    }
+
+.grid-2 {
+      display: grid;
+      /* smaller devices will only be 2 columns wide */
+      grid-template-columns: repeat(2, 1fr);
+    }
+.grid-2 .col-1 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+.grid-2 .col-2 { 
+      /* Make the second column it's own full row */
+      grid-column: 2;
+      grid-row: 1;
+    }
+.clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+.float-left{
+      float: left;
+    }
+    
+.float-right{
+      float: right;
+    }
+.edu h3{
+      text-transform: initial;
+      text-align: left;
+      font-style: normal;
+      clear: both;
+    }
+    
+.edu h4{
+      font-weight: bold;
+      padding: 0;
+      margin: 0;
+      font-size: 1.1rem;
+      margin-bottom: 1.1rem;
+    }
+.time {font-size: 0.75em; font-weight: normal; float: right; margin-top: 0; padding-top: 0; position: absolute; right: 0;} /* 16 / 20 */
