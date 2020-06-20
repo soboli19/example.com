@@ -2,7 +2,7 @@
 require '../../core/functions.php';
 require '../../config/keys.php';
 require '../../core/db_connect.php';
-checkSession();
+//checkSession();
 
 $get = filter_input_array(INPUT_GET);
 $id = $get['id'];

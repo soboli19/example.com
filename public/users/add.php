@@ -1,21 +1,22 @@
 <?php
-require '../../core/functions.php';
 require '../../config/keys.php';
+require '../../core/functions.php';   
+include '../../vendor/autoload.php';
+require '../../core/sessions.php';
 require '../../core/db_connect.php';
-//require '../../core/sessions.php';
 //checkSession();
+
+use Mailgun\Mailgun;
+
+
 
 $message=null;
 
 $args = [
     'first_name'=>FILTER_SANITIZE_STRING, //strips HMTL
-    'last_name'=>FILTER_SANITIZE_STRING, //strips HMTL	    
-    'email'=>FILTER_SANITIZE_EMAIL,	    
+    'last_name'=>FILTER_SANITIZE_STRING, //strips HMTL
+    'email'=>FILTER_SANITIZE_EMAIL,
     'password'=>FILTER_UNSAFE_RAW
-    //'title'=>FILTER_SANITIZE_STRING, //strips HMTL
-    //'meta_description'=>FILTER_SANITIZE_STRING, //strips HMTL
-    //'meta_keywords'=>FILTER_SANITIZE_STRING, //strips HMTL
-    //'body'=>FILTER_UNSAFE_RAW  //NULL FILTER
 ];
 
 $input = filter_input_array(INPUT_POST, $args);
@@ -25,40 +26,64 @@ if(!empty($input)){
     //Strip white space, begining and end
     $input = array_map('trim', $input);
 
-    //Allow only whitelisted HTML
-    //$input['body'] = cleanHTML($input['body']);
-
-    //Create the slug
-    //$slug = slug($input['title']);
+    $hash = password_hash(
+      $input['password'],
+      PASSWORD_BCRYPT,
+      ['cost'=>14]
+    );
 
     //Sanitiezed insert
-    $sql = 'INSERT INTO users SET id=uuid(), first_name=?, last_name=?, email=?';
+    $sql = 'INSERT INTO
+        users
+      SET
+        id=uuid(),
+        first_name=?,
+        last_name=?,
+        email=?,
+        password=?';
 
     if($pdo->prepare($sql)->execute([
         $input['first_name'],
         $input['last_name'],
-        $input['email']
-        //$hash
-    ])){
-       header('LOCATION:/example.com/public/users/view.php?email=' . $input['email']);
+        $input['email'],
+        $hash
+        ])){
+
+        $mgClient = Mailgun::create(MG_KEY,MG_API); //MailGun key 
+        $domain = MG_DOMAIN; //API Hostname
+
+        $from = "Mailgun Sandbox <postmaster@{$domain}>";
+        $text = 'Congratulations ' . $input['first_name'] . $input['last_name'] . ' registration completed';
+
+        $result = $mgClient->messages()->send($domain,
+        array   (  
+                    'from'    => $from,      
+                    'to'      => 'soboli <soboli2c@comcast.net>',
+                    'subject' => 'Hello new user',
+                    'text'    => $text
+                )
+            );   
+
+      //header('LOCATION:/../../users/view.php?email=' . $input['email']);
+      header('LOCATION:/example.com/public/users/view.php?email=' . $input['email']);
     }else{
         $message = 'Something bad happened';
     }
 }
 
 $content = <<<EOT
-<h1>Add a New user</h1>
+<h1>Add a New User</h1>
 {$message}
 <form method="post">
 
 <div class="form-group">
-    <label for="first_name">First name</label>
+    <label for="first_name">First Name</label>
     <input id="first_name" name="first_name" type="text" class="form-control">
 </div>
 
 <div class="form-group">
-    <label for="last_name">Last name</label>
-    <input id="first_name" name="last_name" type="text" class="form-control">
+    <label for="last_name">Last Name</label>
+    <input id="last_name" name="last_name" type="text" class="form-control">
 </div>
 
 <div class="form-group">
@@ -66,7 +91,9 @@ $content = <<<EOT
     <input id="email" name="email" type="text" class="form-control">
 </div>
 
-   
+<div class="form-group">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" class="form-control">
 </div>
 
 <div class="form-group">
@@ -75,5 +102,4 @@ $content = <<<EOT
 </form>
 EOT;
 
-//include '../../core/layout.php';
-require '../../core/layout.php';
+include '../../core/layout.php';

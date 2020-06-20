@@ -23,6 +23,7 @@ if(!empty($input)){
         'email'=>$input['email']
     ]);
     $row=$stmt->fetch();
+    $message = null;
 
     if($row){
         // 5. Attempt a password match
@@ -31,17 +32,24 @@ if(!empty($input)){
             // 6.1 Set a session
             $_SESSION['user'] = [];
             $_SESSION['user']['id']=$row['id'];
+            $message = 'Logon successful';
 
             // 6.2 Redirect the user
-            header('LOCATION: ' . $_POST['goto']);
+            //header('Location: /example.com/public/users/');header('LOCATION: ' . $_POST['goto']);
+            header('Location: /example.com/public/index.php');
         }
+          else {
+            echo 'Login fail';
+          }
     }
 }
 $meta=[];
 $meta['title']="Login";
+echo $message; 
 
 $content=<<<EOT
 <h1>{$meta['title']}</h1>
+ {$message}
 <form method="post" autocomplete="off">
     <div class="form-group">
         <label for="email">Email</label>
@@ -61,9 +69,8 @@ $content=<<<EOT
             type="password"
         >
     </div>
-    <input name="goto" value="{$goto}" type="hidden">
     <input type="submit" class="btn btn-primary">
 </form>
 EOT;
-
+ echo $message; 
 require '../core/layout.php';
