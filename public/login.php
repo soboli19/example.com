@@ -2,6 +2,7 @@
 //require '../bootstrap.php';
 // 1. Connect to the database
 require '../core/db_connect.php';
+require '../core/functions.php';
 require '../core/sessions.php';
 
 
@@ -70,7 +71,11 @@ $content=<<<EOT
         >
     </div>
     <input type="submit" class="btn btn-primary">
+    
 </form>
+    <div>
+        <a class="btn btn-link text-danger" href="pwreset.php">Reset password</a>
+    </div>
 EOT;
  echo $message; 
 require '../core/layout.php';
