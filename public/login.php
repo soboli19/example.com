@@ -24,6 +24,11 @@ if(!empty($input)){
         'email'=>$input['email']
     ]);
     $row=$stmt->fetch();
+    $selected=$stmt->rowCount();
+    // echo $selected; //print("Selected $selected rows");
+    // echo $row['hash'];
+    // echo $input['password'];
+
     $message = null;
 
     if($row){
@@ -74,7 +79,9 @@ $content=<<<EOT
     
 </form>
     <div>
-        <a class="btn btn-link text-danger" href="pwreset.php">Reset password</a>
+    <form action = "pwreset.php">
+       <input type="submit" value="Reset password" class="btn btn-primary">
+    </form>
     </div>
 EOT;
  echo $message; 

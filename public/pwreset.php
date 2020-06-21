@@ -40,6 +40,16 @@ if(!empty($input)){
         // }
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
         $password = substr( str_shuffle( $chars ), 0, 8 );
+        $hash = password_hash($password, PASSWORD_DEFAULT); 
+
+        //table update
+        $sql1 = "UPDATE users SET hash=:password WHERE email=:email";
+        $stmt=$pdo->prepare($sql1); 
+        $stmt->execute([
+            'password' => $hash,
+            'email'=> $email
+            ]);
+
      
         //sleep(10);
 
@@ -57,10 +67,12 @@ if(!empty($input)){
                     'text'    => $text
                 )
             );   
+        echo 'New password sent by email';
+        sleep(5);    
         header('Location: /example.com/public/login.php');
         }
           else {
-            echo 'Email doesnt exist';
+            echo 'Email doesnt exist: ';
             echo $email;
           }
 }
