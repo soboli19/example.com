@@ -82,6 +82,7 @@ $meta['title']="Password Reset";
 
 $content=<<<EOT
 <h1>{$meta['title']}</h1>
+<h3>New password will be send by email</h3>
  {$message}
 <form method="post" autocomplete="off">
     <div class="form-group">

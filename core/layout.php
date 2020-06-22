@@ -5,10 +5,10 @@ function active($name){
   if($current === $name){
     return 'active';
   }
-
   return null;
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
       <!-- Add sanitized content -->
@@ -31,60 +31,64 @@ function active($name){
       <meta charset="UTF-8">
       <title>About me</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" type="text/css" href="/example.com//public/dist/css/main.min.css">
+      <!--<link rel="stylesheet" type="text/css" href="/example.com//public/dist/css/main.min.css"> -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      body{
+        margin-top: 60px;
+      }
+    </style>
   </head>
   <body>
-   
-        <header>
-                <a id="toggleMenu">Menu<a>
-                <span class="logo">My WebSite</span>
-            <nav>
-                    <!--<a href="index.html" class="logo" href="/">Site Logo</a> -->
-                <ul role="navigation">
-                    <li><a href="../public/index.php">Home</a></li>
-                    <li><a href="resume.php">Resume</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-                  <li><a  href="../public/logout.php">Logout</a></li>
-                    <li><a  href="../public/login.php">Login</a></li>
-                    <li><a href="../public/register.php">Register</a></li> 
-                </ul>
-            </nav>  
-        </header>
-        <div id="Wrapper">    
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/">My Site</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="row">
-            <div id="Content">
-                <?php echo $content; ?>
-            </div>
-            <!-- <div id="Sidebar">
-              <div id="AboutMe">
-                <div class="header">Hello, I am Iliya Sobolev</div>
-                <img src="https://www.gravatar.com/avatar/4678a33bf44c38e54a58745033b4d5c6?d=mm" alt="My Avatar" class="img-circle">
-              </div>
-            </div>
-        </div> -->
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link <?php echo active('/'); ?>" href="../public/index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <?php echo active('/resume.html'); ?>" href="resume.html">Resume</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <?php echo active('/contact.php'); ?>" href="../contact.php">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <?php echo active('/posts/'); ?>" href="../public/posts">Posts</a>
+                </li>
+                <?php if(!empty($_SESSION['user']['id'])): ?>
 
-        <div id="Footer" class="clearfix">
-            <small>&copy; 2020 - MyAwesomeSite.com</small>
-            <ul role="navigation">
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="inqueries">Inqueries</a>
+                      <a class="dropdown-item" href="users">Users</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="logout.php">Logout</a>
+                    </div>
+                  </li>
+                <?php else: ?>
+                  <li class="nav-item">
+                    <a class="nav-link <?php echo active('../public/login.php'); ?>" href="../login.php">Login</a>
+                  </li>
+                <?php endif; ?>
             </ul>
         </div>
-  </div>
-  <script>
-  var toggleMenu = document.getElementById('toggleMenu');
-  var nav = document.querySelector('nav');
-  toggleMenu.addEventListener(
-    'click',
-    function(){
-      if(nav.style.display=='block'){
-        nav.style.display='none';
-      }else{
-        nav.style.display='block';
-      }
-    }
-  );
-</script>       
-</body>
+    </nav>
+    <main class="container"><?php echo $content; ?></main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>
+
+ 
